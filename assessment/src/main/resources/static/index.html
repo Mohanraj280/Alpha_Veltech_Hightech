@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Assessment Platform</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to custom CSS -->
+</head>
+<body>
+<div class="container">
+    <!-- Questions Navigation -->
+    <div id="question-nav" class="nav-section"></div>
+
+    <div class="row">
+        <!-- Main Content Section -->
+        <div class="content-section">
+            <h5>Question</h5>
+            <div id="question-container" class="card">
+                <div class="card-body">
+                    <h5 id="question-text" class="card-title"></h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Options Section -->
+        <div class="options-section">
+            <h5>Options</h5>
+            <div id="options-container" class="form-group"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Sticky Buttons -->
+<div class="sticky-buttons">
+    <button id="prev-btn" class="btn">Previous</button>
+    <button id="next-btn" class="btn">Next</button>
+</div>
+
+<!-- Modal for Submission Summary -->
+<div id="submissionModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="submissionModalLabel">Submission Summary</h5>
+                <button type="button" id="modal-close" class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="summary-text"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="confirm-submit-btn" class="btn">Confirm and Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="mediaManager.js"></script>
+<script src="script.js"></script> <!-- Link to separated JavaScript file -->
+</body>
+</html>
