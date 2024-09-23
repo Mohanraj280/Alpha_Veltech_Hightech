@@ -1,5 +1,9 @@
 package com.mohanraj.assessment.Controller;
 
+import com.mohanraj.assessment.Model.Module;
+import com.mohanraj.assessment.Model.Question;
+import com.mohanraj.assessment.Service.ModuleService;
+import com.mohanraj.assessment.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
@@ -12,8 +16,11 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.client.RestTemplate;
 
 import org.springframework.http.HttpHeaders;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -23,23 +30,37 @@ public class AssessmentController {
     private QuestionService questionService;
 
     @Autowired
+    private ModuleService moduleService;
+
+    @Autowired
     private JavaMailSender mailSender;
 
     @PostMapping("/submit-answers")
     public Map<String, Object> submitAnswers(@RequestBody Map<String, Object> userAnswers, HttpSession session) {
         String username = (String) session.getAttribute("username");
         String userEmail = (String) session.getAttribute("email");
-
+        String moduleId = (String) userAnswers.get("moduleId");
         // Validate that 'answers' exists and is a Map
         if (userAnswers == null || !userAnswers.containsKey("answers") || !(userAnswers.get("answers") instanceof Map)) {
             return Map.of("success", false, "message", "Invalid answers data");
         }
+        System.out.println(moduleId);
+        if (moduleId == null) {
+            throw new IllegalArgumentException("Module ID must not be null");
+        }
 
         @SuppressWarnings("unchecked")
         Map<String, String> answers = (Map<String, String>) userAnswers.get("answers");
+        System.out.println(answers);
 
-        // Get correct answers from database
-        List<Question> questions = questionService.getAllQuestions();
+        // Get questions from the specified module
+        Optional<Module> module = moduleService.getModuleById(moduleId);
+        // Replace with dynamic retrieval if needed
+        List<Question> questions = module.get().getQuestions();
+        // List to hold wrong answered questions
+        List<Question> wrongAnsweredQuestions = new ArrayList<>();
+
+
         int score = 0;
         int totalQuestions = questions.size();
 
@@ -50,11 +71,25 @@ public class AssessmentController {
 
             if (userAnswer != null && correctAnswer.equals(userAnswer.trim())) {
                 score++;
+            } else {
+                // Add wrong answered question to the list
+                wrongAnsweredQuestions.add(question);
             }
         }
+        List<String> correctAnswers = new ArrayList<>();
 
+        System.out.println("Wrong Answered Questions:");
+        for (Question wrongQuestion : wrongAnsweredQuestions) {
+            correctAnswers.add("Candidate answer is incorrect for this question ");
+            correctAnswers.add(wrongQuestion.getQuestionText());
+            correctAnswers.add("but the correct answer is");
+            correctAnswers.add(wrongQuestion.getCorrectAnswer());
+           // System.out.println("Question ID: " + wrongQuestion.getId() + ", Question Text: " + wrongQuestion.getQuestionText()+", Correct Answer: "+wrongQuestion.getCorrectAnswer());
+        }
+
+        System.out.println(correctAnswers);
         // Generate skill improvement recommendations
-        String recommendations = getChatbotRecommendation(username,score, totalQuestions,generateRecommendations(score,totalQuestions));
+        String recommendations = getChatbotRecommendation(username, score, String.valueOf(correctAnswers), totalQuestions, generateRecommendations(score, totalQuestions));
 
         // Send email with error handling
         try {
@@ -65,6 +100,7 @@ public class AssessmentController {
 
         return Map.of("success", true, "message", "Results submitted successfully.");
     }
+
 
     private String generateRecommendations(int score, int totalQuestions) {
         // Placeholder logic for generating recommendations based on score
@@ -91,11 +127,11 @@ public class AssessmentController {
     }
 
 
-    private String getChatbotRecommendation(String username, int score, int totalQuestions, String recommands) {
+    private String getChatbotRecommendation(String username, int score, String wrong, int totalQuestions, String recommands) {
         RestTemplate restTemplate = new RestTemplate();
         String chatbotUrl = "http://localhost:3000/chat";  // Change to your chatbot server URL
 
-        String userInput = String.format("User %s scored %d out of %d. %s , Provide recommendations for improvement.", username, score, totalQuestions,recommands);
+        String userInput = String.format("User %s scored %d out of %d. %s ,%s Provide recommendations for improvement based on their answers.", username, score, totalQuestions,recommands, wrong);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

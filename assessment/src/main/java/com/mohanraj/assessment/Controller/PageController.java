@@ -10,6 +10,6 @@ public class PageController {
     @GetMapping("/")
     public String main()
     {
-        return "main.html";
+        return "CandidatePages/main.html";
     }
 }
