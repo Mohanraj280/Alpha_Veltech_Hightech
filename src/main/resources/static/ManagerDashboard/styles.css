@@ -1,0 +1,121 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f9; /* Light background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://i.pinimg.com/736x/bd/b3/56/bdb356651c295cade233db2fd62ef8d3.jpg'); /* Replace with your image path */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    backdrop-filter: blur(8px);
+}
+
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #002b5b; /* Dark blue for heading */
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+/* Flexbox Container */
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Add gap between sections */
+}
+
+/* Left Section Styles */
+.left-section, .right-section {
+    background-color: #ffffff; /* White background for sections */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1; /* Flex property to allow both sections to grow equally */
+    min-width: 300px; /* Minimum width for responsiveness */
+}
+
+/* Heading Styles */
+.left-section h2, .right-section h2 {
+    color: #002b5b; /* Dark blue for section headings */
+    margin-bottom: 20px;
+}
+
+/* Input Styles */
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #b0bec5; /* Light border */
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border-color: #002b5b; /* Dark blue on focus */
+    outline: none;
+}
+
+/* Submit Button Styles */
+button[type="submit"] {
+    background-color: #002b5b; /* Dark blue */
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #004080; /* Darker shade on hover */
+}
+
+/* Modules List Styles */
+.right-section ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+}
+
+.right-section li {
+    background-color: #0073e6; /* Dark blue background for list items */
+    color: #fff; /* White text color */
+    margin: 10px 0; /* Margin between items */
+    padding: 15px; /* Padding inside the circle */
+    border-radius: 50%; /* Make the items circular */
+    border: 1px solid #005bb5; /* Border color */
+    display: flex; /* Use flexbox to center text */
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+    transition: transform 0.2s, background-color 0.2s; /* Animation on hover */
+    height: 60px; /* Fixed height */
+    width: 60px; /* Fixed width */
+    text-align: center; /* Center text */
+}
+
+.right-section li:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #005bb5; /* Darker background on hover */
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .content {
+        flex-direction: column; /* Stack sections on small screens */
+    }
+
+    .left-section, .right-section {
+        margin-bottom: 20px; /* Space between stacked sections */
+        width: 100%; /* Full width on small screens */
+    }
+}

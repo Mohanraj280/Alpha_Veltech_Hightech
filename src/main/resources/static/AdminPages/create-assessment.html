@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Assessment</title>
+    <link rel="stylesheet" href="assess.css"> <!-- Link to external CSS for styling -->
+</head>
+<body>
+<h2>Create Assessment</h2> <!-- Main title of the page -->
+<br><br>
+
+<!-- Step 1: Module Creation Form -->
+<form id="moduleForm">
+    <div>
+        <label for="moduleName">Module Name</label>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- Label for module name input -->
+        <input type="text" id="moduleName" placeholder="Module Name" required> <!-- Input for module name -->
+    </div>
+    <div>
+        <label for="moduleDescription">Module Description</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!-- Label for module description input -->
+        <input type="text" id="moduleDescription" placeholder="Module Description" required> <!-- Input for module description -->
+    </div>
+    <div>
+        <label for="numQuestions">Number of Questions</label>&nbsp;&nbsp;&nbsp; <!-- Label for number of questions input -->
+        <input type="number" id="numQuestions" placeholder="Number of Questions" required> <!-- Input for number of questions -->
+    </div>
+    <button type="button" onclick="createQuestionFields()">Next</button> <!-- Button to proceed to question input -->
+</form>
+
+<!-- Step 2: Questions Input Section, initially hidden -->
+<div id="questionsContainer" style="display: none;">
+    <form id="questionsForm"></form><br> <!-- Form for dynamically generated questions -->
+    <button type="button" onclick="submitAssessment()">Submit</button> <!-- Button to submit the assessment -->
+</div>
+
+<script>
+    // Function to check user authorization on page load
+    async function checkAuthorization() {
+        try {
+            const response = await fetch('/dashboardAuth', {
+                method: 'GET',
+                credentials: 'include' // Include cookies for session management
+            });
+
+            if (response.status === 403) {
+                // If unauthorized, redirect to the login page
+                window.location.href = '/AdminPages/admin.html';
+            } else {
+                // Optionally handle authorized state (e.g., load existing modules)
+                const data = await response.text(); // Or response.json() for JSON data
+                console.log(data); // Log response for debugging
+            }
+        } catch (error) {
+            console.error('Error checking authorization:', error);
+            // Redirect to login on error
+            window.location.href = '/AdminPages/admin.html';
+        }
+    }
+
+    // Call the authorization check on page load
+    window.onload = checkAuthorization;
+
+    // Function to dynamically create question fields based on user input
+    function createQuestionFields() {
+        const numQuestions = document.getElementById('numQuestions').value; // Get number of questions
+        const questionsContainer = document.getElementById('questionsContainer'); // Reference to questions container
+        const questionsForm = document.getElementById('questionsForm'); // Reference to questions form
+
+        questionsForm.innerHTML = ''; // Clear any previous question fields
+
+        // Loop to create question fields dynamically
+        for (let i = 1; i <= numQuestions; i++) {
+            questionsForm.innerHTML += `
+                    <h3>Question ${i}</h3> <!-- Question header -->
+                    <input type="text" name="question${i}" placeholder="Question ${i}" required><br> <!-- Input for the question text -->
+                    <input type="text" name="options_${i}" placeholder="Options (comma separated)" required><br> <!-- Input for options -->
+                    <input type="text" name="correctAnswer${i}" placeholder="Correct Answer" required><br><hr> <!-- Input for correct answer -->
+                `;
+        }
+
+        // Hide the module creation form and show the questions input form
+        document.getElementById('moduleForm').style.display = 'none';
+        questionsContainer.style.display = 'block';
+    }
+
+    // Function to submit the assessment data
+    function submitAssessment() {
+        const moduleName = document.getElementById('moduleName').value; // Get module name
+        const moduleDescription = document.getElementById('moduleDescription').value; // Get module description
+        const questions = []; // Array to store questions
+
+        // Loop to collect question data from the dynamically created fields
+        for (let i = 1; i <= document.getElementById('numQuestions').value; i++) {
+            const questionText = document.querySelector(`input[name="question${i}"]`).value; // Get question text
+            const optionsInput = document.querySelector(`input[name="options_${i}"]`).value; // Get options input
+            const options = optionsInput.split(',').map(option => option.trim()); // Split and trim options
+            const correctAnswer = document.querySelector(`input[name="correctAnswer${i}"]`).value; // Get correct answer
+
+            // Generate a unique ID for each question
+            const uniqueId = `question_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+
+            // Add the question object to the questions array
+            questions.push({ id: uniqueId, questionText, options, correctAnswer });
+        }
+
+        // Prepare the assessment data to be sent
+        const assessmentData = { moduleName, moduleDescription, questions };
+        console.log('Assessment Data:', assessmentData); // Log assessment data for debugging
+
+        // Send assessment data to the backend API
+        fetch('/api/assessment/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Set content type to JSON
+            },
+            body: JSON.stringify(assessmentData) // Stringify the assessment data
+        })
+            .then(response => response.json()) // Parse JSON response
+            .then(data => {
+                console.log('Success:', data); // Log success response
+                // Optionally handle success (e.g., display a success message)
+            })
+            .catch(error => {
+                console.error('Error:', error); // Log errors
+                // Optionally handle error (e.g., display an error message)
+            });
+
+        // Redirect to the dashboard after submission
+        window.location.href = "dashboard.html";
+    }
+</script>
+</body>
+</html>

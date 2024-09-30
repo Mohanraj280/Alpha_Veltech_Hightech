@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Assessment Management Dashboard</title>
+    <style>
+        /* General Layout */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set the font for the body */
+            background-color: #d6d6de; /* Background color for the body */
+            color: #f5f5f7; /* Default text color */
+            background-image: url('https://i.pinimg.com/736x/bd/b3/56/bdb356651c295cade233db2fd62ef8d3.jpg'); /* Replace with your image path */
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat;
+            backdrop-filter: blur(8px);
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: center; /* Center align items */
+            align-items: flex-start; /* Align items to the start */
+            min-height: 100vh; /* Minimum height of the viewport */
+            padding: 20px; /* Padding around the body */
+        }
+
+        /* Container styling */
+        #modules-container {
+            width: 60%; /* Width of the container */
+            max-width: 1200px; /* Maximum width for larger screens */
+            padding: 20px; /* Padding inside the container */
+            background-color: #eadfdf; /* Background color for the container */
+            border-radius: 12px; /* Rounded corners */
+            overflow-y: auto; /* Enable vertical scroll if needed */
+            display: grid; /* Use grid layout for modules */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            grid-gap: 20px; /* Gap between grid items */
+        }
+
+        /* Header styles */
+        h1 {
+            font-size: 28px; /* Font size for headers */
+            text-align: left; /* Left align the header */
+            margin-bottom: 30px; /* Margin below the header */
+            color: #ffba00; /* Color for the header */
+        }
+
+        /* Module card styles */
+        .module {
+            background-color: #f3f3fc; /* Background color for module cards */
+            padding: 15px; /* Padding inside the module card */
+            margin-bottom: 20px; /* Margin below each module card */
+            border-radius: 8px; /* Rounded corners for module cards */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Shadow effect */
+            transition: background-color 0.3s; /* Transition effect for background color */
+        }
+
+        .module:hover {
+            cursor: pointer; /* Change cursor on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Shadow effect on hover */
+        }
+
+        .module h2 {
+            font-size: 22px; /* Font size for module titles */
+            margin-bottom: 10px; /* Margin below the title */
+            color: #ffba00; /* Color for module titles */
+        }
+
+        .module p {
+            font-size: 16px; /* Font size for module descriptions */
+            color: #000000; /* Color for module descriptions */
+        }
+
+        /* Scroll bar styling for overflow */
+        #modules-container::-webkit-scrollbar {
+            width: 10px; /* Width of the scrollbar */
+        }
+
+        #modules-container::-webkit-scrollbar-thumb {
+            background-color: #444; /* Color for the scrollbar thumb */
+            border-radius: 10px; /* Rounded corners for scrollbar thumb */
+        }
+
+        #modules-container::-webkit-scrollbar-track {
+            background-color: #2b2d42; /* Background color for scrollbar track */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Container for modules -->
+<div id="modules-container"></div>
+
+<script>
+    // Fetch and display modules from the server
+    fetch('../api/assessment/adminApi/modules')
+        .then(response => response.json())
+        .then(modules => {
+            const container = document.getElementById('modules-container');
+            modules.forEach(module => {
+                const moduleDiv = document.createElement('div');
+                moduleDiv.classList.add('module'); // Assign CSS class for styling
+
+                const moduleName    = document.createElement('h2');
+                moduleName.textContent = module.moduleName; // Set the module name
+
+                const moduleDescription = document.createElement('p');
+                moduleDescription.textContent = module.moduleDescription; // Set the module description
+
+                // Click event to load module-specific questions
+                moduleDiv.addEventListener('click', () => {
+                    // Store module ID and name in sessionStorage
+                    sessionStorage.setItem('selectedModuleId', module.id);
+                    sessionStorage.setItem('selectedModuleName', module.moduleName);
+                    // Navigate to a specific page for the selected module, e.g., load questions
+
+                    // Redirect to the manage-questions.html page with moduleId as a query parameter
+                    window.location.href = `module-questions.html?moduleId=${module.id}`;
+                });
+
+                // Append title and description to the module div
+                moduleDiv.appendChild(moduleName);
+                moduleDiv.appendChild(moduleDescription);
+                container.appendChild(moduleDiv); // Append module div to the container
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching modules:', error); // Log errors in fetching modules
+        });
+</script>
+
+<script>
+    // Function to check user authorization on page load
+    async function checkAuthorization() {
+        try {
+            const response = await fetch('/dashboardAuth', {
+                method: 'GET',
+                credentials: 'include' // Include cookies with the request
+            });
+
+            if (response.status === 403) {
+                // If unauthorized, redirect to the login page
+                window.location.href = '/AdminPages/admin.html';
+            } else {
+                // Handle authorized response, e.g., load modules or other data
+                const data = await response.text(); // Or response.json() if returning JSON
+                console.log(data); // Log the response or handle it as needed
+            }
+        } catch (error) {
+            console.error('Error checking authorization:', error); // Log any errors
+            // Redirect to the login page in case of a network error
+            window.location.href = '/AdminPages/admin.html';
+        }
+    }
+
+    // Call the authorization check when the window loads
+    window.onload = checkAuthorization;
+</script>
+</body>
+</html>
