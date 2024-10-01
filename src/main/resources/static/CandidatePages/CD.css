@@ -1,0 +1,91 @@
+/* General Layout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8; /* Light background color for the body */
+    color: #333; /* Darker text color for better readability */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    background-image: url('https://i.pinimg.com/736x/bd/b3/56/bdb356651c295cade233db2fd62ef8d3.jpg'); /* Replace with your image path */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    backdrop-filter: blur(8px);
+}
+
+/* Container styling for the modules */
+#modules-container {
+    width: 60%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #ffffff; /* Light background color for the modules container */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for subtle depth */
+    overflow-y: auto;
+}
+
+h1 {
+    font-size: 28px;
+    text-align: left;
+    margin-bottom: 30px;
+    color: #1e3a8a; /* Dark blue highlight for headings */
+}
+
+/* Module card styles */
+.module {
+    background-color: #eaeeef; /* Lighter background color for module cards */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Lighter shadow for module cards */
+    transition: background-color 0.3s;
+}
+
+.module:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    background-color: #e0e7ff; /* Slightly darker background on hover */
+}
+
+.module h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #1e3a8a; /* Dark blue color for module names */
+}
+
+.module p {
+    font-size: 16px;
+    color: #555; /* Darker color for module descriptions */
+}
+
+/* Responsive Grid Layout for modules */
+#modules-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+/* Scroll bar styling for overflow in modules container */
+#modules-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+#modules-container::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color for the scrollbar thumb */
+    border-radius: 10px;
+}
+
+#modules-container::-webkit-scrollbar-track {
+    background-color: #f0f4f9; /* Light background for scrollbar track */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    #modules-container {
+        width: 90%; /* Reduce width on smaller screens */
+    }
+}

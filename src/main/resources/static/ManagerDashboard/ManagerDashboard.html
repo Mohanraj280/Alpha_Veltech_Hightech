@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+    <link rel="stylesheet" href="ManagerDashboard/styles.css">
+</head>
+<body>
+<div class="dashboard">
+    <h1>Manager Dashboard</h1>
+    <div class="content">
+        <!-- Left section for Admin Registration -->
+        <div class="left-section">
+            <h2>Admin Registration</h2>
+            <form id="registrationForm" action="/api/register" method="post">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Register Admin</button>
+            </form>
+        </div>
+
+        <!-- Right section for displaying Modules -->
+        <div class="right-section">
+            <h2>Ongoing Assessments</h2>
+            <div id="modules-container">
+                <ul id="modules-list"></ul>
+            </div>
+        </div>
+    </div>
+    <div id="message-container">
+        <!-- This is where the success or failure message will appear -->
+    </div>
+</div>
+
+<script src="ManagerDashboard/scripts.js"></script>
+</body>
+</html>

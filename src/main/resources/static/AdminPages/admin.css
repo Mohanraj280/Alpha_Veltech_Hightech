@@ -1,0 +1,294 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #efefef; /* Black background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://i.pinimg.com/736x/bd/b3/56/bdb356651c295cade233db2fd62ef8d3.jpg'); /* Replace with your image path */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    backdrop-filter: blur(8px);
+    color: #e0e0e0; /* Light gray text */
+}
+
+/* Common Container Styling */
+.container {
+    background-color: #1e1e1e; /* Dark gray for contrast */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 255, 0, 0.2); /* Green shadow */
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Heading */
+h2 {
+    font-size: 32px;
+    color: #00A67E; /* Green for heading */
+    margin-bottom: 20px;
+    transition: font-size 0.3s ease;
+}
+
+/* Navigation */
+nav {
+    margin-top: 20px;
+}
+
+.nav-link {
+    display: inline-block;
+    font-size: 18px;
+    color: #00A67E; /* Green text color */
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 10px 20px;
+    border: 1px solid #00A67E;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #00A67E;
+    color: #000000; /* Black text on hover */
+    border-color: #00A67E;
+}
+
+/* Input Fields */
+input {
+    font-size: 16px;
+    padding: 12px;
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #00A67E; /* Green border */
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #00A67E;
+}
+
+/* Button */
+button {
+    background-color: #00A67E;
+    color: #000000;
+    font-size: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #00875f; /* Darker green on hover */
+}
+
+/* Message Styling */
+.message {
+    color: red;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px;
+        max-width: 90%;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .nav-link, input, button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .nav-link, input, button {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column; /* Stack links vertically */
+        align-items: center;
+    }
+
+    .nav-link {
+        margin: 10px 0; /* Space between stacked links */
+    }
+}
+
+/* Common Container Styling */
+.container {
+    background-color: #1e1e1e; /* Dark gray background for container */
+    padding: 40px; /* Padding inside the container */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 12px 40px rgba(0, 255, 0, 0.2); /* Green shadow for depth effect */
+    width: 100%; /* Full width of parent element */
+    max-width: 600px; /* Maximum width for larger screens */
+    text-align: center; /* Center text inside the container */
+}
+
+/* Heading */
+h2 {
+    font-size: 32px; /* Large font size for headings */
+    color: #00A67E; /* Bright green color for headings */
+    margin-bottom: 20px; /* Space below the heading */
+    transition: font-size 0.3s ease; /* Smooth transition for font size changes */
+}
+
+/* Navigation Styling */
+nav {
+    margin-top: 20px; /* Space above the navigation links */
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    display: inline-block; /* Display links inline */
+    font-size: 18px; /* Font size for links */
+    color: #00A67E; /* Green text color for links */
+    text-decoration: none; /* Remove underline from links */
+    margin: 0 15px; /* Space between links */
+    padding: 10px 20px; /* Padding inside the link */
+    border: 1px solid #00A67E; /* Green border around links */
+    border-radius: 6px; /* Rounded corners for links */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transitions for hover effects */
+}
+
+.nav-link:hover {
+    background-color: #00A67E; /* Change background color on hover */
+    color: #000000; /* Change text color to black on hover */
+    border-color: #00A67E; /* Maintain border color on hover */
+}
+
+/* Input Field Styles */
+input {
+    font-size: 16px; /* Font size for input fields */
+    padding: 12px; /* Padding inside input fields */
+    width: 100%; /* Full width of the container */
+    margin: 10px 0; /* Space above and below input fields */
+    border: 1px solid #00A67E; /* Green border around input fields */
+    border-radius: 5px; /* Rounded corners for input fields */
+    background-color: #1e1e1e; /* Dark gray background for input fields */
+    color: #e0e0e0; /* Light gray text color for input */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+input:focus {
+    outline: none; /* Remove default outline */
+    border-color: #00A67E; /* Change border color when focused */
+}
+
+/* Button Styles */
+button {
+    background-color: #00A67E; /* Green background for buttons */
+    color: #000000; /* Black text color for buttons */
+    font-size: 18px; /* Font size for buttons */
+    padding: 12px; /* Padding inside buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for buttons */
+    width: 100%; /* Full width of the container */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+button:hover {
+    background-color: #00875f; /* Darker green on hover */
+}
+
+/* Message Styling */
+.message {
+    color: red; /* Red text color for messages (e.g., error messages) */
+    margin-top: 20px; /* Space above messages */
+    font-size: 14px; /* Font size for messages */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px; /* Adjust padding for smaller screens */
+        max-width: 90%; /* Allow container to take more width on smaller screens */
+    }
+
+    h2 {
+        font-size: 28px; /* Reduce font size for headings on smaller screens */
+    }
+
+    .nav-link, input, button {
+        font-size: 14px; /* Reduce font size for links, inputs, and buttons */
+        padding: 10px; /* Adjust padding for smaller elements */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px; /* Further reduce padding for very small screens */
+        max-width: 100%; /* Full width on very small devices */
+    }
+
+    h2 {
+        font-size: 24px; /* Further reduce font size for headings */
+    }
+
+    .nav-link, input, button {
+        font-size: 12px; /* Further reduce font size for smaller elements */
+        padding: 8px; /* Adjust padding for small elements */
+    }
+
+    nav {
+        display: flex; /* Use flexbox for navigation layout */
+        flex-direction: column; /* Stack links vertically */
+        align-items: center; /* Center align links */
+    }
+
+    .nav-link {
+        margin: 10px 0; /* Space between vertically stacked links */
+    }
+}
+.student-register {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color:rgba(131, 138, 135, 0.37);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 40px;
+    cursor: pointer;
+    display: flex;
+    width:230px;
+    align-items: center;
+}
+
+.student-register i {
+    margin-right: 5px;
+}
+
+.student-register:hover {
+    background-color: #10a37f;
+}
