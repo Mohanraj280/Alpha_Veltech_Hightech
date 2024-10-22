@@ -43,5 +43,5 @@ This project is an Assessment Platform designed to provide a comprehensive solut
 
 ## Getting Started
 
-
+![Screenshot 2024-10-22 212811](https://github.com/user-attachments/assets/6301a58c-3c27-4019-b32a-84cae622e39a)
 
