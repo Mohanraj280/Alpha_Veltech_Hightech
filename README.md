@@ -39,6 +39,21 @@ This project is an Assessment Platform designed to provide a comprehensive solut
 
 6. **Mail Sent with GenAI Recommendations**
    - After submission, the system sends an email with Generative AI recommendations based on the candidate’s performance.
+  
+### Educator Process Flow
+1. **Login and Dashboard Access**: Login to the platform, view ongoing assessments, recent activity, and access quick links.
+2. **Create and Upload Assessment Content**: Design assessments using various question types like MCQs, coding challenges, etc.
+3. **Customize Assessments**: Modify existing assessments by editing questions and settings.
+4. **Preview and Test Assessments**: Preview assessments to ensure correct functionality.
+5. **Schedule Assessments**: Set dates and times for assessments using a calendar view.
+6. **Analyze Results and Feedback**: Analyze detailed performance reports and generate insights.
+7. **Update Assessment Content**: Edit questions and improve assessments based on analytics.
+8. **Manage Assessment Access**: Control access and set permissions for different users.
+
+### Administrator Process Flow
+1. **Login and Dashboard Access**: Access an admin dashboard with an overview of the system and tools.
+2. **Manage User Accounts**: Create, edit, or delete user accounts for candidates, educators, and admins.
+
    
 
 ## Getting Started
