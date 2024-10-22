@@ -43,22 +43,5 @@ This project is an Assessment Platform designed to provide a comprehensive solut
 
 ## Getting Started
 
-![Screenshot 2024-08-29 183230](https://github.com/user-attachments/assets/3a914f61-dd9d-4996-89bb-b0652c433c60)
-![Screenshot 2024-08-29 183319](https://github.com/user-attachments/assets/13829d43-2d30-42b2-885d-bd6e7dd417c7)
-
-![Screenshot 2024-08-29 183339](https://github.com/user-attachments/assets/d82fd0d3-49d3-4ec6-99ec-a3bd75938197)
-
-![Screenshot 2024-08-29 183355](https://github.com/user-attachments/assets/ad156661-6407-4909-9874-7e56668bf021)
-
-![Screenshot 2024-08-29 183410](https://github.com/user-attachments/assets/d24928e8-46f9-477e-94d4-fd1a2bd622fc)
-
-![Screenshot 2024-08-29 183432](https://github.com/user-attachments/assets/fa803381-598e-4023-9331-51733c56e545)
-
-![Screenshot 2024-08-29 183443](https://github.com/user-attachments/assets/584f05a3-de4b-4b49-8200-7d24450aa9b4)
-
-![Screenshot 2024-08-29 184135](https://github.com/user-attachments/assets/79a89db8-6985-453b-a8fd-b953b333f3c4)
-
-![Screenshot 2024-08-29 184147](https://github.com/user-attachments/assets/519606f8-2f75-4435-b7fd-68ad90446289)
-
 
 
